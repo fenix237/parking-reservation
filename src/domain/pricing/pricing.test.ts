@@ -20,7 +20,7 @@ describe('pricing.logic', () => {
       expect(getBillableHours(5)).toBe(1);
     });
 
-    it("arrondit à l'heure supérieure (heure entamée)", () => {
+    it("arrondit à l'heure supérieure", () => {
       expect(getBillableHours(61)).toBe(2);
       expect(getBillableHours(120)).toBe(2);
       expect(getBillableHours(121)).toBe(3);
@@ -29,31 +29,35 @@ describe('pricing.logic', () => {
 
   describe('calculatePrice', () => {
     it('facture correctement une citadine garée 1h', () => {
-      const result = calculatePrice('citadine', START, START + 1 * HOUR);
-      expect(result.total).toBe(2);
+      const result = calculatePrice('citadine', START, START + HOUR);
+
+      expect(result.total).toBe(200);
       expect(result.durationHours).toBe(1);
     });
 
-    it('applique la dégressivité pour une citadine garée 4h (2h à 2€ + 2h à 1.5€)', () => {
+    it('applique correctement les deux premiers paliers pour une citadine garée 4h', () => {
       const result = calculatePrice('citadine', START, START + 4 * HOUR);
-      expect(result.total).toBe(7);
+
+      expect(result.total).toBe(700);
       expect(result.breakdown).toHaveLength(2);
     });
 
-    it('traverse les 3 paliers pour un séjour long (2h*2 + 4h*1.5 + 2h*1 = 12)', () => {
+    it('applique correctement les trois paliers pour une citadine garée 8h', () => {
       const result = calculatePrice('citadine', START, START + 8 * HOUR);
-      expect(result.total).toBe(12);
+
+      expect(result.total).toBe(1200);
       expect(result.breakdown).toHaveLength(3);
     });
 
-    it('gère un stationnement de quelques minutes (minimum 1h facturée)', () => {
+    it('facture au minimum une heure pour un stationnement très court', () => {
       const result = calculatePrice('moto', START, START + 5 * 60 * 1000);
+
       expect(result.durationHours).toBe(1);
-      expect(result.total).toBe(1); // 1h * 1€/h
+      expect(result.total).toBe(100);
     });
 
     it('lève une erreur pour un type de véhicule inconnu', () => {
-      // @ts-expect-error test volontaire d'un type invalide
+      // @ts-expect-error Test volontaire d'un type de véhicule invalide
       expect(() => calculatePrice('camion', START, START + HOUR)).toThrow();
     });
   });
