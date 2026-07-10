@@ -2,9 +2,15 @@
 
 ## Description du projet
 
+Ce projet de reservation de parking vise a allouer efficacement des places de parking pour les differents vehicules, qu'ils soient citadines, utilitaires, familiales ou des motos. Le choix des places est detaillé dans la section "Conception, Choix de compatibilite". Le projet prend en charge l'entree et la sortie de vehicules avec tarif en fonction du temps passé par chacun d'eux, ainsi que l'etat du parking et les stats sur les places libres ou occupés en fonction du type de vehicule.
+
 ## Conception
 
 ### Model de donnees
+
+* Vehicule: Pour les vehicules
+* ParkingSpot: Pour les places de parking
+
 
 ### Choix de compatibilite
  
@@ -23,6 +29,9 @@ Pour la tarification, un modele de degressivite par tranche est adopte, c'est a 
 Ainsi si le vehicule passe 30min il paiera 200f,
 Si il va jusqu'a 5 il paira 200f * 2 + 150f * 3 = 850f, enfin s'il va jusqua 10 h il paiera 200f * 2 + 150f *4 + 100f * 4 =  1250f.
 
+### Choix d'espace
+
+Le parcking dispose au total de 28 places: 10 places citadines, 8 familiales, 4 utilitaires et 6 motos.
 
 ## Installation et lancement du projet
 
@@ -33,6 +42,8 @@ Si il va jusqu'a 5 il paira 200f * 2 + 150f * 3 = 850f, enfin s'il va jusqua 10 
 * Lancer le projet via la commande: npm run dev
 
 ## Tests
+
+* Les tests se font via la commande: npm run test:run
 
 ## Details horaires
 
