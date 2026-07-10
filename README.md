@@ -10,6 +10,8 @@ Ce projet de reservation de parking vise a allouer efficacement des places de pa
 
 * Vehicule: Pour les vehicules
 * ParkingSpot: Pour les places de parking
+* ParkingHistoryEntry: Historique des entrees de vehicules
+
 
 
 ### Choix de compatibilite
@@ -51,3 +53,7 @@ Le parcking dispose au total de 28 places: 10 places citadines, 8 familiales, 4 
 
 * Heure de debut: 12h40
 * Heure de fin: 16h40
+
+## Axes d'amelioration
+
+Le projet en l'etat actuel n'est limité qu'a la logique metier (domain) et a la configuration du stockage (storage). Ainsi une mise en place des divers hooks et interfaces pour un aspect visuel sera pris en compte dans les prochaines versions.
