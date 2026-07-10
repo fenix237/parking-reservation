@@ -1,26 +1,27 @@
-import { DEFAULT_SPOTS_BY_TYPE } from "./parking.constants";
-import type { ParkingState, ParkingSpot, SpotType } from "./parking.types";
+import type { SpotType } from '../compatibility/compatibility.types';
+import type { ParkingSpot, ParkingState } from './parking.types';
+import { SPOT_COUNTS } from './parking.constants';
 
-function createSpots(): ParkingSpot[] {
+
+// Identifiant unique pour chaque place du parking
+function createSpotId(type: SpotType, index: number): string {
+  return `${type}-${String(index + 1).padStart(2, '0')}`;
+}
+
+//Etat initial complet du parking
+export function createInitialParkingState(): ParkingState {
   const spots: ParkingSpot[] = [];
 
-  (Object.keys(DEFAULT_SPOTS_BY_TYPE) as SpotType[]).forEach((type) => {
-    const count = DEFAULT_SPOTS_BY_TYPE[type];
-    for (let i = 1; i <= count; i += 1) {
+  (Object.keys(SPOT_COUNTS) as SpotType[]).forEach((type) => {
+    const count = SPOT_COUNTS[type];
+    for (let i = 0; i < count; i++) {
       spots.push({
-        id: `${type}-${i}`,
+        id: createSpotId(type, i),
         type,
-        occupiedBy: null,
+        vehicle: null,
       });
     }
   });
 
-  return spots;
-}
-
-export function createInitialParkingState(): ParkingState {
-  return {
-    spots: createSpots(),
-    vehicles: [],
-  };
+  return { spots, history: [] };
 }

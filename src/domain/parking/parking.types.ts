@@ -1,44 +1,44 @@
-export type VehicleType = "citadine" | "familiale" | "utilitaire" | "moto";
-export type SpotType = "citadine" | "familiale" | "utilitaire" | "moto";
-export type ParkingVehicleStatus = "parked" | "exited";
+import type { VehicleType, SpotType } from '../compatibility/compatibility.types';
 
-export interface ParkingVehicle {
+export interface Vehicle {
   id: string;
-  plate: string;
   type: VehicleType;
-  spotId: string;
-  parkedAt: string;
-  exitedAt?: string;
-  status: ParkingVehicleStatus;
-  amountDue?: number;
+  entryTime: number; 
 }
 
 export interface ParkingSpot {
   id: string;
   type: SpotType;
-  occupiedBy: string | null;
+  vehicle: Vehicle | null;
+}
+
+export interface ParkingHistoryEntry {
+  vehicleId: string;
+  vehicleType: VehicleType;
+  spotId: string;
+  entryTime: number;
+  exitTime: number;
+  price: number;
 }
 
 export interface ParkingState {
   spots: ParkingSpot[];
-  vehicles: ParkingVehicle[];
+  history: ParkingHistoryEntry[];
 }
 
-export interface ParkingEntryInput {
-  plate: string;
-  type: VehicleType;
-  parkedAt?: string;
+export interface CheckInResult {
+  state: ParkingState;
+  spot: ParkingSpot;
 }
 
-export interface ParkingExitResult {
-  vehicle: ParkingVehicle;
-  amountDue: number;
-  parkedDurationMinutes: number;
+export interface CheckOutResult {
+  state: ParkingState;
+  price: number;
+  durationMinutes: number;
 }
 
-export interface ParkingSummary {
-  totalSpots: number;
-  freeSpots: number;
-  occupiedSpots: number;
-  byType: Record<SpotType, { total: number; free: number; occupied: number }>;
+export interface ParkingSummaryByType {
+  total: number;
+  occupied: number;
+  free: number;
 }
