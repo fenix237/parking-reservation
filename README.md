@@ -41,7 +41,7 @@ Le parcking dispose au total de 28 places: 10 places citadines, 8 familiales, 4 
 
 * Lancer le projet via la commande: npm run dev
 
-* Acceder au projet sur le navigateur via: [text](http://localhost:5173/)
+* Acceder au projet sur le navigateur via: http://localhost:5173/
 
 ## Tests
 
