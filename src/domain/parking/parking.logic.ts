@@ -130,7 +130,6 @@ export function getParkingSummary(state: ParkingState): Record<string, ParkingSu
       summary[spot.type].free += 1;
     }
   }
-
   return summary;
 }
 
