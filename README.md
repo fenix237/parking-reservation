@@ -41,6 +41,8 @@ Le parcking dispose au total de 28 places: 10 places citadines, 8 familiales, 4 
 
 * Lancer le projet via la commande: npm run dev
 
+* Acceder au projet sur le navigateur via: [text](http://localhost:5173/)
+
 ## Tests
 
 * Les tests se font via la commande: npm run test:run
@@ -48,4 +50,4 @@ Le parcking dispose au total de 28 places: 10 places citadines, 8 familiales, 4 
 ## Details horaires
 
 * Heure de debut: 12h40
-* Heure de fin: 
+* Heure de fin: 16h40
